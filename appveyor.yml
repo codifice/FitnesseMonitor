@@ -10,6 +10,7 @@ skip_branch_with_pr: true
  
 install:
   - appveyor DownloadFile https://github.com/jediwhale/fitsharp/releases/download/2.6/release.2.6.net.452.zip
+  - appveyor DownloadFile http://www.fitnesse.org/fitnesse-standalone.jar?responder=releaseDownload&release=20180127 -FileName test\fitnesse\fitnesse-standalone.jar
   - 7z x .\release.2.6.net.452.zip -oFitSharp
   - choco install gitversion.portable -pre -y
   - choco install codecov -y
