@@ -31,8 +31,8 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
-/src/TestResults/
 **/TestResults/
 **/coverage.opencover.xml
 /FitSharp/
 **/fitnesse-standalone.jar
+**/fitnesse/*.html
