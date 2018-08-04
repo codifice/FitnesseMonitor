@@ -36,3 +36,5 @@ msbuild.wrn
 /FitSharp/
 **/fitnesse-standalone.jar
 **/fitnesse/*.html
+**/FitNesseRoot/*.zip
+**/FitNesseRoot/**/*.zip

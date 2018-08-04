@@ -7,11 +7,12 @@ Test
 !define COMMAND_PATTERN {%m -r fitSharp.Slim.Service.Runner %p}
 !define TEST_RUNNER {C:\projects\FitnesseMonitor\FitSharp\Runner.exe}
 
-!|import                   |
+!|import                  |
 |FitnesseMonitorAcceptance|
 
 *!
 
-!|Division                    |
-|Numerator|Denominator|Quotient?|
-|10       |0          |        |
+!|Division                           |
+|Numerator|Denominator|Wait|Quotient?|
+|10       |0          |0   |         |
+|10       |1          |1   |         |
