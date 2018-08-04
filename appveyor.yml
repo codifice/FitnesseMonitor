@@ -1,0 +1,50 @@
+image: Visual Studio 2017
+environment:
+  SONAR_KEY:
+    secure: GbMflncwje+wnuVU8gtWsUctEOWNdUs2D1xRejCdqcrwmcGmEIW7jn1YAV8bgyk4 
+  NUGET_KEY:
+    secure: 4ho/dV8xjB0pvW4zm0JjJbrZMtioZm7S37cflQZdZMAPhGUQYezWbWn7nvpi0lvD
+
+      # Do not build feature branch with open Pull Requests
+skip_branch_with_pr: true      
+ 
+install:
+  - appveyor DownloadFile https://github.com/jediwhale/fitsharp/releases/download/2.6/release.2.6.net.452.zip
+  - 7z x .\release.2.6.net.452.zip -oFitSharp
+  - choco install gitversion.portable -pre -y
+  - choco install codecov -y
+  - dotnet tool install --global dotnet-sonarscanner
+
+assembly_info:
+  patch: false
+
+before_build:
+  - cmd: dotnet restore --verbosity m
+  - ps: gitversion /l console /output buildserver /updateAssemblyInfo 
+  - ps: Update-AppveyorBuild -Version "${env:GitVersion_NuGetVersion}-${env:APPVEYOR_BUILD_NUMBER}"
+  - cmd: cd src\FitnesseMonitor
+  - cmd: dotnet setversion %GitVersion_NuGetVersion%
+  - cmd: cd ..\..
+  - cmd: dotnet sonarscanner begin /k:"FitnesseMonitor"  /d:sonar.organization="martinjarvis-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="%SONAR_KEY%" /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" /d:sonar.coverage.exclusions="test/**" /v:"%GitVersion_NuGetVersion%"
+     
+# build:
+#   publish_nuget: true
+#   publish_nuget_symbols: true
+#   parallel: true
+#   verbosity: minimal
+
+# deploy:
+#   provider: NuGet
+#   api_key: $(NUGET_KEY)
+#   skip_symbols: false
+#   artifact: /.*\.nupkg/
+
+after_build:
+#  - cmd: appveyor PushArtifact "FitnesseMonitor.%GitVersion_NuGetVersion%.nupkg"  
+
+# test_script:
+#   - cmd: dotnet test test/FitnesseMonitor.UnitTests/FitnesseMonitor.UnitTests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+
+on_finish:
+  - cmd: codecov -f test/FitnesseMonitor.UnitTests/coverage.opencover.xml
+  - cmd: dotnet sonarscanner end /d:sonar.login="%SONAR_KEY%"

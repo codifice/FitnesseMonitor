@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Authors>Martin Jarvis</Authors>
+    <Company>MCJ Development Ltd</Company>
+    <Description>Monitors a Fitnesse run to fail fast when test runs should require a 100% pass rate</Description>
+    <Copyright>2018 MCJ Development Ltd</Copyright>
+    <RepositoryUrl>https://github.com/martinjarvis/FitnesseMonitor</RepositoryUrl>
+    <PackageLicenseUrl>https://opensource.org/licenses/mit-license.php</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/martinjarvis/FitnesseMonitor</PackageProjectUrl>
+    <PackageTags>fitnesse "acceptance tests" fitsharp</PackageTags>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="dotnet-setversion" Version="*" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2018.2.1" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="All" />
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.3.1.5982" />
+    <PackageReference Include="ProcessStartAsync" Version="0.1.1" />
+  </ItemGroup>
+
+</Project>

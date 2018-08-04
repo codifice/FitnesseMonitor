@@ -1,0 +1,19 @@
+---
+Test
+---
+!*> Setup
+!define TEST_SYSTEM {slim} 
+!path C:\projects\FitnesseMonitor\test\FitnesseMonitorAcceptance\bin\Debug\FitnesseMonitorAcceptance.dll
+!define COMMAND_PATTERN {%m -r fitSharp.Slim.Service.Runner %p}
+!define TEST_RUNNER {C:\projects\FitnesseMonitor\FitSharp\Runner.exe}
+
+!|import                   |
+|FitnesseMonitorAcceptance|
+
+*!
+
+!|Division                    |
+|Numerator|Denominator|Quotient?|
+|10       |2          |5        |
+|12.6     |3          |4.2      |
+|100      |4          |25       |
